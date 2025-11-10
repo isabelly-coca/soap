@@ -1,0 +1,148 @@
+/* ===== Estilo geral da página ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #e8e6f3;
+}
+
+/* ===== Container principal ===== */
+.cadastro-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+/* ===== Título ===== */
+.titulo {
+  color: #3c4365;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* ===== Formulário ===== */
+.form-tarefa {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: 900px;
+  gap: 17px; /* Menor espaçamento entre campos */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #3c4365;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.input-group input,
+.input-group textarea {
+  border: 1.5px solid #5a6385;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  resize: none;
+}
+
+.input-group textarea {
+  min-height: 60px;
+  max-height: 140px;
+  overflow-y: auto;
+  
+}
+
+/* ===== Botão cadastrar ===== */
+.btn-cadastrar {
+  margin: 15px auto 0 auto;
+  background-color: #5a6385;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  width: 200px;
+  font-size: 15px;
+}
+
+.btn-cadastrar:hover {
+  background-color: #4d5777;
+}
+
+@media (max-width: 768px) {
+  .form-tarefa {
+    width: 90%;
+    max-width: 450px;
+  }
+
+  .btn-cadastrar {
+    width: 180px;
+  }
+
+  .titulo {
+    font-size: 24px;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .form-tarefa {
+    width: 95%;
+    gap: 10px;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .btn-cadastrar {
+    width: 150px;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .btn-flutuante {
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+    bottom: 70px;
+  }
+
+  .footer-menu {
+    height: 55px;
+  }
+
+  .menu-item .icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+/* Remove todo tipo de sublinhado ou linha de links no menu */
+.cadastrotarefa-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  border-bottom: none !important;
+  background: none !important;
+}
+
+
+
+

@@ -1,0 +1,65 @@
+
+
+.menu-superior-container {
+    /* CHAVE: Deixa o menu fixo no topo da viewport */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa a largura total */
+    z-index: 9999; /* Garante que fique acima de todo o conteúdo */
+    
+    /* Habilita o Flexbox */
+    display: flex;
+    
+    /* CHAVE: Distribui o espaço. Coloca Filtro na esquerda, Sino na direita, 
+       e centraliza o Título no espaço restante (se não houver margens automáticas). */
+    justify-content: space-between; 
+    
+    /* Centraliza os itens verticalmente */
+    align-items: center; 
+    
+    padding: 10px 25px 10px 8px; /* Preenchimento interno */
+    min-height: 48px; /* Altura mínima para o cabeçalho */
+    color:#3c4365; /* Cor dos ícones e texto */
+}
+
+
+.menu-titulo {
+    font-size: 1.2em;
+    font-weight: 600;
+    /* Usa margens para garantir que o título se mantenha centralizado, 
+       mesmo que os botões tenham larguras diferentes. */
+    text-align: center;
+    /* Ajuste o padding horizontal para evitar que o texto encoste nos botões */
+    padding: 10px 10px; 
+}
+
+/* ==================================== */
+/* BOTÕES DE ÍCONE (Filtro e Sino) */
+/* ==================================== */
+
+.menu-icon-btn {
+    background: none;
+    border: none;
+    color:#3c4365;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%; /* Torna o botão um círculo */
+    transition: background-color 0.2s;
+    /* Garante que os botões não sejam espremidos */
+    flex-shrink: 0; 
+    
+    /* Para alinhar com o espaço do Flexbox e ter o efeito de "espaçamento entre" */
+    /* Garante que o ícone esteja sempre no centro do seu botão */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.menu-icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Ajustes específicos de margem para o Flexbox: 
+   - Ajudam a separar os botões dos lados extremos se necessário, 
+     mas 'justify-content: space-between' já faz a maior parte do trabalho. */

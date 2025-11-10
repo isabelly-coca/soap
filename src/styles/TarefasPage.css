@@ -1,0 +1,363 @@
+/* ===== Estilo geral ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ebe8f5, #d9d6ed);
+  overflow: hidden;
+  color: #3d4b68;
+}
+
+/* ===== Container principal ===== */
+.tarefas-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 30px 20px;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ===== Título ===== */
+.titulo-tarefas {
+  margin-top: 40px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3554;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* ===== Lista de tarefas ===== */
+.lista-tarefas {
+  width: calc(100% - 20px);
+  max-width: 1000px;
+  flex-grow: 1;
+  margin-top: 25px;
+  overflow-y: auto;
+  padding-right: 12px;
+  padding-bottom: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #b0accd #e1def5;
+}
+
+.lista-tarefas::-webkit-scrollbar {
+  width: 8px;
+}
+.lista-tarefas::-webkit-scrollbar-thumb {
+  background-color: #b0accd;
+  border-radius: 10px;
+}
+
+/* ===== Itens de tarefa ===== */
+.tarefa-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #f7f6fc;
+  border-radius: 14px;
+  padding: 18px 25px;
+  margin: 0 auto 20px auto;
+  width: 100%;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.08),
+              -3px -3px 8px rgba(255, 255, 255, 0.8);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  gap: 15px;
+}
+
+.tarefa-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+              -3px -3px 12px rgba(255, 255, 255, 0.9);
+}
+
+.tarefa-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #6e7bbd;
+  margin-top: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ===== Detalhes da tarefa ===== */
+.tarefa-detalhes {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+/* Header com Título e Prioridade */
+.tarefa-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* Espaço entre título/prioridade e meta-info */
+}
+
+/* ===== Título da tarefa ===== */
+.tarefa-titulo {
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0;
+  color: #3d4b68;
+  line-height: 1.2;
+  display: block;
+  flex-grow: 1;
+  padding-right: 15px; /* Espaço entre título e prioridade */
+}
+
+/* ===== Prioridade ===== */
+.tarefa-prioridade {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a63a6;
+  background: rgba(110, 123, 189, 0.15);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+/* Meta info (Categoria e Data) */
+.tarefa-meta-info {
+  display: flex;
+  gap: 20px; /* Espaço entre categoria e data */
+  margin-bottom: 10px; /* Espaço entre meta-info e descrição */
+  flex-wrap: wrap;
+}
+
+/* ===== Categoria e Data ===== */
+.tarefa-categoria,
+.tarefa-data {
+  font-size: 14px;
+  color: #6e7bbd;
+  display: block;
+}
+
+/* ===== Descrição da tarefa ===== */
+.tarefa-descricao {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 0;
+  color: #5c6784;
+}
+
+.tarefa-item.concluida {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* ===== Modo de Edição ===== */
+.edicao-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.edicao-form input[type="text"],
+.edicao-form textarea,
+.edicao-form select,
+.edicao-form input[type="date"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border: 1px solid #c8c5db;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #3d4b68;
+  background-color: #fcfcff;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.edicao-form input:focus,
+.edicao-form textarea:focus,
+.edicao-form select:focus {
+  border-color: #6e7bbd;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(110, 123, 189, 0.2);
+}
+
+.edicao-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.edicao-form label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5a63a6;
+  margin-bottom: 2px;
+  display: block;
+}
+
+/* Linha com Categoria e Prioridade */
+.edicao-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.edicao-row select {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Botões Salvar e Cancelar */
+.botoes-salvar-cancelar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.botoes-salvar-cancelar button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+.btn-salvar {
+  background-color: #6e7bbd;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #5a63a6;
+}
+
+.btn-cancelar {
+  background-color: #e1def5;
+  color: #3d4b68;
+}
+
+.btn-cancelar:hover {
+  background-color: #d9d6ed;
+}
+
+/* ===== Ícones de ação ===== */
+.botoes-acao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.botoes-acao button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.botoes-acao button:hover {
+  background-color: rgba(110, 123, 189, 0.1);
+  transform: scale(1.1);
+}
+
+.botoes-acao button img {
+  width: 22px;
+  height: 22px;
+}
+
+/* ===== Botão de adicionar tarefa ===== */
+.btn-add {
+  position: fixed;
+  bottom: 85px;
+  right: 30px;
+  background: linear-gradient(135deg, #3d4b68, #6e7bbd);
+  color: white;
+  border: none;
+  width: 65px;
+  height: 65px;
+  font-size: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(61, 75, 104, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add:hover {
+  transform: scale(1.12);
+  box-shadow: 0 10px 25px rgba(61, 75, 104, 0.5);
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 900px) {
+  .lista-tarefas {
+    max-width: 92%;
+  }
+
+  .tarefa-item {
+    padding: 15px 18px;
+    margin: 0 auto 15px auto;
+  }
+
+  .titulo-tarefas {
+    font-size: 26px;
+  }
+
+  .botoes-acao button img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .titulo-tarefas {
+    font-size: 22px;
+  }
+
+  .tarefa-item {
+    padding: 12px 15px;
+    margin: 0 auto 10px auto;
+  }
+
+  .tarefa-header-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tarefa-prioridade {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+  .btn-add {
+    width: 55px;
+    height: 55px;
+    font-size: 28px;
+    bottom: 75px;
+    right: 25px;
+  }
+}
