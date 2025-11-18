@@ -12,6 +12,13 @@ export default function CadastroPage() {
   // Função que envia os dados para o backend
   const handleCadastro = async () => {
 
+    // 🔹 Validação de e-mail
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValido.test(email)) {
+      alert("Digite um e-mail válido! Ex: exemplo@dominio.com");
+      return;
+    }
+
     // 🔹 Verifica se todos os campos estão preenchidos
     if (!nome || !email || !senha || !confirmarSenha) {
       alert("Por favor, preencha todos os campos!");
@@ -53,7 +60,7 @@ export default function CadastroPage() {
 
         <input
           type="text"
-          placeholder="NOME"
+          placeholder="NOME *"
           className="input-field"
           value={nome}
           required
@@ -62,7 +69,7 @@ export default function CadastroPage() {
 
         <input
           type="email"
-          placeholder="EMAIL"
+          placeholder="EMAIL *"
           className="input-field"
           value={email}
           required
@@ -71,7 +78,7 @@ export default function CadastroPage() {
 
         <input
           type="password"
-          placeholder="SENHA"
+          placeholder="SENHA *"
           className="input-field"
           value={senha}
           required
@@ -80,7 +87,7 @@ export default function CadastroPage() {
 
         <input
           type="password"
-          placeholder="CONFIRMAR SENHA"
+          placeholder="CONFIRMAR SENHA *"
           className="input-field"
           value={confirmarSenha}
           required
@@ -94,3 +101,4 @@ export default function CadastroPage() {
     </div>
   );
 }
+

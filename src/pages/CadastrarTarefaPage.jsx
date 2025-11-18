@@ -14,7 +14,6 @@ export default function CadastrarTarefaPage() {
     prioridade: "",
   });
 
-  // Carrega categorias salvas ao iniciar
   useEffect(() => {
     const categoriasSalvas = JSON.parse(localStorage.getItem("categorias")) || [
       "Trabalho",
@@ -25,7 +24,6 @@ export default function CadastrarTarefaPage() {
     setCategorias(categoriasSalvas);
   }, []);
 
-  // Salva nova categoria
   const cadastrarNovaCategoria = () => {
     if (novaCategoria.trim() && !categorias.includes(novaCategoria)) {
       const novas = [...categorias, novaCategoria];
@@ -36,13 +34,11 @@ export default function CadastrarTarefaPage() {
     }
   };
 
-  // Atualiza campos
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleCadastrar = () => {
-    // 🔹 Valida campos obrigatórios
     if (!form.categoria || !form.titulo || !form.data || !form.prioridade) {
       alert("Por favor, preencha todos os campos obrigatórios!");
       return;
@@ -60,14 +56,15 @@ export default function CadastrarTarefaPage() {
     <div className="pagina-cadastro">
       <MenuSuperior />
 
+      {/* Título fora do formulário */}
       <div className="titulo-container">
         <h1 className="titulo">CADASTRAR TAREFA</h1>
       </div>
 
+      {/* Área do formulário */}
       <div className="cadastro-container">
         <form className="form-tarefa" onSubmit={(e) => e.preventDefault()}>
           
-          {/* CATEGORIA EXISTENTE */}
           <div className="input-group">
             <label>CATEGORIA EXISTENTE *</label>
             <select
@@ -83,7 +80,6 @@ export default function CadastrarTarefaPage() {
             </select>
           </div>
 
-          {/* NOVA CATEGORIA */}
           <div className="input-group nova-categoria-group">
             <label>NOVA CATEGORIA</label>
             <div className="nova-categoria-input">
@@ -103,7 +99,6 @@ export default function CadastrarTarefaPage() {
             </div>
           </div>
 
-          {/* TÍTULO */}
           <div className="input-group">
             <label>TÍTULO *</label>
             <input
@@ -116,7 +111,6 @@ export default function CadastrarTarefaPage() {
             />
           </div>
 
-          {/* DESCRIÇÃO */}
           <div className="input-group">
             <label>DESCRIÇÃO</label>
             <textarea
@@ -128,7 +122,6 @@ export default function CadastrarTarefaPage() {
             ></textarea>
           </div>
 
-          {/* DATA */}
           <div className="input-group">
             <label>DATA *</label>
             <input
@@ -140,7 +133,6 @@ export default function CadastrarTarefaPage() {
             />
           </div>
 
-          {/* PRIORIDADE */}
           <div className="input-group">
             <label>PRIORIDADE *</label>
             <select
@@ -173,4 +165,5 @@ export default function CadastrarTarefaPage() {
     </div>
   );
 }
+
 

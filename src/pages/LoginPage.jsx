@@ -9,9 +9,20 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  // Função de validação de email
+  const emailValido = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const handleLogin = () => {
     if (!email || !senha) {
       alert("Por favor, preencha o email e a senha!");
+      return;
+    }
+
+    if (!emailValido(email)) {
+      alert("Por favor, insira um email válido! Exemplo: nome@dominio.com");
       return;
     }
 
@@ -26,7 +37,7 @@ export default function LoginPage() {
 
         <input 
           type="email" 
-          placeholder="EMAIL" 
+          placeholder="EMAIL *" 
           className="input-field" 
           value={email}
           required
@@ -35,14 +46,13 @@ export default function LoginPage() {
 
         <input 
           type="password" 
-          placeholder="SENHA" 
+          placeholder="SENHA *" 
           className="input-field" 
           value={senha}
           required
           onChange={(e) => setSenha(e.target.value)}
         />
 
-        {/* Agora é um botão que valida antes de redirecionar */}
         <button className="login-button" onClick={handleLogin}>
           LOGIN
         </button>
@@ -63,4 +73,6 @@ export default function LoginPage() {
     </div>
   );
 }
+
+
 
