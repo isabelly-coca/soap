@@ -25,7 +25,7 @@ export default function CadastrarTarefaPage() {
     setCategorias(categoriasSalvas);
   }, []);
 
-  // Salva uma nova categoria no localStorage
+  // Salva nova categoria
   const cadastrarNovaCategoria = () => {
     if (novaCategoria.trim() && !categorias.includes(novaCategoria)) {
       const novas = [...categorias, novaCategoria];
@@ -36,14 +36,15 @@ export default function CadastrarTarefaPage() {
     }
   };
 
-  // Atualiza campos do formulário
+  // Atualiza campos
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleCadastrar = () => {
-    if (!form.titulo || !form.categoria) {
-      alert("Preencha pelo menos o título e a categoria!");
+    // 🔹 Valida campos obrigatórios
+    if (!form.categoria || !form.titulo || !form.data || !form.prioridade) {
+      alert("Por favor, preencha todos os campos obrigatórios!");
       return;
     }
 
@@ -59,18 +60,19 @@ export default function CadastrarTarefaPage() {
     <div className="pagina-cadastro">
       <MenuSuperior />
 
-      {/* 🔹 TÍTULO SEPARADO DO CONTAINER */}
       <div className="titulo-container">
         <h1 className="titulo">CADASTRAR TAREFA</h1>
       </div>
 
-      {/* 🔹 CONTAINER PRINCIPAL */}
       <div className="cadastro-container">
         <form className="form-tarefa" onSubmit={(e) => e.preventDefault()}>
+          
+          {/* CATEGORIA EXISTENTE */}
           <div className="input-group">
-            <label>CATEGORIA EXISTENTE</label>
+            <label>CATEGORIA EXISTENTE *</label>
             <select
               name="categoria"
+              required
               value={form.categoria}
               onChange={handleChange}
             >
@@ -81,6 +83,7 @@ export default function CadastrarTarefaPage() {
             </select>
           </div>
 
+          {/* NOVA CATEGORIA */}
           <div className="input-group nova-categoria-group">
             <label>NOVA CATEGORIA</label>
             <div className="nova-categoria-input">
@@ -100,17 +103,20 @@ export default function CadastrarTarefaPage() {
             </div>
           </div>
 
+          {/* TÍTULO */}
           <div className="input-group">
-            <label>TÍTULO</label>
+            <label>TÍTULO *</label>
             <input
               type="text"
               name="titulo"
+              required
               value={form.titulo}
               onChange={handleChange}
               placeholder="Título da tarefa"
             />
           </div>
 
+          {/* DESCRIÇÃO */}
           <div className="input-group">
             <label>DESCRIÇÃO</label>
             <textarea
@@ -122,20 +128,24 @@ export default function CadastrarTarefaPage() {
             ></textarea>
           </div>
 
+          {/* DATA */}
           <div className="input-group">
-            <label>DATA</label>
+            <label>DATA *</label>
             <input
               type="date"
               name="data"
+              required
               value={form.data}
               onChange={handleChange}
             />
           </div>
 
+          {/* PRIORIDADE */}
           <div className="input-group">
-            <label>PRIORIDADE</label>
+            <label>PRIORIDADE *</label>
             <select
               name="prioridade"
+              required
               value={form.prioridade}
               onChange={handleChange}
             >
@@ -155,6 +165,7 @@ export default function CadastrarTarefaPage() {
               CADASTRAR
             </button>
           </div>
+
         </form>
       </div>
 
@@ -162,3 +173,4 @@ export default function CadastrarTarefaPage() {
     </div>
   );
 }
+

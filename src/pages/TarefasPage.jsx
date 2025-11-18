@@ -6,79 +6,17 @@ import MenuSuperior from "../components/MenuSuperior";
 
 const PRIORIDADES = ["Baixa", "Média", "Alta"];
 
-export default function TarefasPage() {
-  const [tarefas, setTarefas] = useState([]);
-  const [categorias, setCategorias] = useState([]);
-  const [edicaoAtual, setEdicaoAtual] = useState(null);
-  const [filtro, setFiltro] = useState({ categoria: "", prioridade: "" });
-
-  // ---------------------------
-  // CARREGAR TAREFAS E CATEGORIAS DO LOCALSTORAGE
-  // ---------------------------
-  useEffect(() => {
-    const tarefasSalvas = JSON.parse(localStorage.getItem("tarefas")) || [];
-    const categoriasSalvas = JSON.parse(localStorage.getItem("categorias")) || [
-      "Trabalho",
-      "Pessoal",
-      "Finanças",
-      "Saúde",
-      "Estudos",
-      "Outro",
-    ];
-    setTarefas(tarefasSalvas);
-    setCategorias(categoriasSalvas);
-  }, []);
-
-  // ---------------------------
-  // FILTRO DE TAREFAS
-  // ---------------------------
-  const tarefasFiltradas = tarefas.filter((t) => {
-    const catOk = !filtro.categoria || t.categoria === filtro.categoria;
-    const prioOk = !filtro.prioridade || t.prioridade === filtro.prioridade;
-    return catOk && prioOk;
-  });
-
-  // ---------------------------
-  // FUNÇÕES DE AÇÃO
-  // ---------------------------
-  const alternarConclusao = (id) => {
-    const novasTarefas = tarefas.map((t) =>
-      t.id === id ? { ...t, concluida: !t.concluida } : t
-    );
-    setTarefas(novasTarefas);
-    localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
-  };
-
-  const excluirTarefa = (id, e) => {
-    e.stopPropagation();
-    const novasTarefas = tarefas.filter((t) => t.id !== id);
-    setTarefas(novasTarefas);
-    localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
-  };
-
-  const iniciarEdicao = (tarefa, e) => {
-    e.stopPropagation();
-    setEdicaoAtual({ ...tarefa });
-  };
-
-  const handleEdicaoChange = (e) => {
-    const { name, value } = e.target;
-    setEdicaoAtual({ ...edicaoAtual, [name]: value });
-  };
-
-  const salvarEdicao = (e) => {
-    e.preventDefault();
-    const novasTarefas = tarefas.map((t) =>
-      t.id === edicaoAtual.id ? edicaoAtual : t
-    );
-    setTarefas(novasTarefas);
-    localStorage.setItem("tarefas", JSON.stringify(novasTarefas));
-    setEdicaoAtual(null);
-  };
-
-  const cancelarEdicao = () => setEdicaoAtual(null);
-
-  const EdicaoForm = () => (
+/* =======================================================
+   FORMULÁRIO DE EDIÇÃO — FORA DO COMPONENTE PRINCIPAL
+   ======================================================= */
+function EdicaoForm({
+  edicaoAtual,
+  handleEdicaoChange,
+  salvarEdicao,
+  cancelarEdicao,
+  categorias,
+}) {
+  return (
     <form onSubmit={salvarEdicao} className="edicao-form">
       <input
         type="text"
@@ -88,12 +26,14 @@ export default function TarefasPage() {
         placeholder="Título"
         required
       />
+
       <textarea
         name="descricao"
         value={edicaoAtual.descricao || ""}
         onChange={handleEdicaoChange}
         placeholder="Descrição da tarefa"
       />
+
       <div className="edicao-row">
         <select
           name="categoria"
@@ -106,6 +46,7 @@ export default function TarefasPage() {
             </option>
           ))}
         </select>
+
         <select
           name="prioridade"
           value={edicaoAtual.prioridade}
@@ -118,6 +59,7 @@ export default function TarefasPage() {
           ))}
         </select>
       </div>
+
       <label>Data:</label>
       <input
         type="date"
@@ -125,24 +67,94 @@ export default function TarefasPage() {
         value={edicaoAtual.data}
         onChange={handleEdicaoChange}
       />
+
       <div className="botoes-salvar-cancelar">
         <button type="submit" className="btn-salvar">
           Salvar
         </button>
-        <button
-          type="button"
-          onClick={cancelarEdicao}
-          className="btn-cancelar"
-        >
+        <button type="button" onClick={cancelarEdicao} className="btn-cancelar">
           Cancelar
         </button>
       </div>
     </form>
   );
+}
 
-  // ---------------------------
-  // RENDERIZAÇÃO
-  // ---------------------------
+/* =======================================================
+   COMPONENTE PRINCIPAL DA PÁGINA
+   ======================================================= */
+export default function TarefasPage() {
+  const [tarefas, setTarefas] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [edicaoAtual, setEdicaoAtual] = useState(null);
+  const [filtro, setFiltro] = useState({ categoria: "", prioridade: "" });
+
+  // Carregar tarefas e categorias
+  useEffect(() => {
+    const tarefasSalvas = JSON.parse(localStorage.getItem("tarefas")) || [];
+    const categoriasSalvas =
+      JSON.parse(localStorage.getItem("categorias")) || [
+        "Trabalho",
+        "Pessoal",
+        "Finanças",
+        "Saúde",
+        "Estudos",
+        "Outro",
+      ];
+
+    setTarefas(tarefasSalvas);
+    setCategorias(categoriasSalvas);
+  }, []);
+
+  // Filtro
+  const tarefasFiltradas = tarefas.filter((t) => {
+    const catOk = !filtro.categoria || t.categoria === filtro.categoria;
+    const prioOk = !filtro.prioridade || t.prioridade === filtro.prioridade;
+    return catOk && prioOk;
+  });
+
+  // Alternar conclusão
+  const alternarConclusao = (id) => {
+    const novas = tarefas.map((t) =>
+      t.id === id ? { ...t, concluida: !t.concluida } : t
+    );
+    setTarefas(novas);
+    localStorage.setItem("tarefas", JSON.stringify(novas));
+  };
+
+  // Excluir
+  const excluirTarefa = (id, e) => {
+    e.stopPropagation();
+    const novas = tarefas.filter((t) => t.id !== id);
+    setTarefas(novas);
+    localStorage.setItem("tarefas", JSON.stringify(novas));
+  };
+
+  // Iniciar edição
+  const iniciarEdicao = (tarefa, e) => {
+    e.stopPropagation();
+    setEdicaoAtual({ ...tarefa });
+  };
+
+  // Alterações no formulário de edição
+  const handleEdicaoChange = (e) => {
+    const { name, value } = e.target;
+    setEdicaoAtual({ ...edicaoAtual, [name]: value });
+  };
+
+  // Salvar edição
+  const salvarEdicao = (e) => {
+    e.preventDefault();
+    const novas = tarefas.map((t) =>
+      t.id === edicaoAtual.id ? edicaoAtual : t
+    );
+    setTarefas(novas);
+    localStorage.setItem("tarefas", JSON.stringify(novas));
+    setEdicaoAtual(null);
+  };
+
+  const cancelarEdicao = () => setEdicaoAtual(null);
+
   return (
     <div className="tarefas-container">
       <MenuSuperior setFiltro={setFiltro} categorias={categorias} />
@@ -156,10 +168,18 @@ export default function TarefasPage() {
             return (
               <div
                 key={tarefa.id}
-                className={`tarefa-item ${tarefa.concluida ? "concluida" : ""}`}
+                className={`tarefa-item ${
+                  tarefa.concluida ? "concluida" : ""
+                }`}
               >
                 {isEditing ? (
-                  <EdicaoForm />
+                  <EdicaoForm
+                    edicaoAtual={edicaoAtual}
+                    handleEdicaoChange={handleEdicaoChange}
+                    salvarEdicao={salvarEdicao}
+                    cancelarEdicao={cancelarEdicao}
+                    categorias={categorias}
+                  />
                 ) : (
                   <>
                     <div className="tarefa-conteudo">
@@ -169,6 +189,7 @@ export default function TarefasPage() {
                         onChange={() => alternarConclusao(tarefa.id)}
                         className="tarefa-checkbox"
                       />
+
                       <span
                         className={`tarefa-titulo ${
                           tarefa.concluida ? "concluida" : ""
@@ -212,4 +233,5 @@ export default function TarefasPage() {
     </div>
   );
 }
+
 
